@@ -60,7 +60,7 @@ export default function SignUpForm() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.header}>Sign up</Text>
+      <Text style={styles.header}>Sign up!</Text>
 
       {console.log("Rendering TextInput for email and password")}
 

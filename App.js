@@ -3,9 +3,14 @@ import React, { useState, useEffect } from 'react';
 import { getApps, initializeApp } from 'firebase/app';
 import { getAuth, onAuthStateChanged } from 'firebase/auth';
 import { StyleSheet, View, Text } from 'react-native';
-import SignUpForm from './components/SignUpComponent';
-import LogInForm from './components/LogInComponent';
-import MainScreen from './screens/MainScreen';
+import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+
+import SignUpForm from './Components/SignUpComponent';
+import LogInForm from './Components/LoginComponent';
+import MainScreen from './Screens/MainScreen';
+import { DetailScreen } from './Screens/DetailScreen';
+import { HomeScreen } from './Screens/HomeScreen';
+
 
 // Firebase-konfiguration
 const firebaseConfig = {
@@ -16,6 +21,8 @@ const firebaseConfig = {
   messagingSenderId: "799223231023",
   appId: "1:799223231023:web:6910ca9a2aa757f604ccda"
 };
+
+const Tab = createBottomTabNavigator();
 
 export default function App() {
   const [user, setUser] = useState({ loggedIn: false });
@@ -54,6 +61,15 @@ export default function App() {
   useEffect(() => {
     console.log("User state updated:", user);
   }, [user]);
+
+  return (
+    <Tab.Navigator>
+      <Tab.Screen name='Home' component={HomeScreen} />
+      <Tab.Screen name="Log ind" component={LogInForm} />
+      <Tab.Screen name="Sign Up" component={SignUpForm} />
+      <Tab.Screen name='Details' component={DetailScreen} />
+    </Tab.Navigator>
+  )
 
   // Tjek om brugeren er logget ind, og vis den relevante skærm
   if (user.loggedIn) {
