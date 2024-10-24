@@ -15,9 +15,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-               BuildableName = "SidsteChance.app"
-               BlueprintName = "SidsteChance"
-               ReferencedContainer = "container:SidsteChance.xcodeproj">
+               BuildableName = "Godkendelsesopgave2024.app"
+               BlueprintName = "Godkendelsesopgave2024"
+               ReferencedContainer = "container:Godkendelsesopgave2024.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -33,9 +33,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "00E356ED1AD99517003FC87E"
-               BuildableName = "SidsteChanceTests.xctest"
-               BlueprintName = "SidsteChanceTests"
-               ReferencedContainer = "container:SidsteChance.xcodeproj">
+               BuildableName = "Godkendelsesopgave2024Tests.xctest"
+               BlueprintName = "Godkendelsesopgave2024Tests"
+               ReferencedContainer = "container:Godkendelsesopgave2024.xcodeproj">
             </BuildableReference>
          </TestableReference>
       </Testables>
@@ -55,9 +55,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "SidsteChance.app"
-            BlueprintName = "SidsteChance"
-            ReferencedContainer = "container:SidsteChance.xcodeproj">
+            BuildableName = "Godkendelsesopgave2024.app"
+            BlueprintName = "Godkendelsesopgave2024"
+            ReferencedContainer = "container:Godkendelsesopgave2024.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -72,9 +72,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "13B07F861A680F5B00A75B9A"
-            BuildableName = "SidsteChance.app"
-            BlueprintName = "SidsteChance"
-            ReferencedContainer = "container:SidsteChance.xcodeproj">
+            BuildableName = "Godkendelsesopgave2024.app"
+            BlueprintName = "Godkendelsesopgave2024"
+            ReferencedContainer = "container:Godkendelsesopgave2024.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>

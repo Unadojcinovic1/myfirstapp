@@ -109,9 +109,9 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
     compileSdk rootProject.ext.compileSdkVersion
 
-    namespace "com.sidstechance"
+    namespace "com.godkendelsesopgave2024"
     defaultConfig {
-        applicationId "com.sidstechance"
+        applicationId "com.godkendelsesopgave2024"
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1

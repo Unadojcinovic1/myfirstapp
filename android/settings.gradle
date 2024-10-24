@@ -44,7 +44,7 @@ if (getRNMinorVersion() >= 75) {
   }
 }
 
-rootProject.name = 'SidsteChance'
+rootProject.name = 'Godkendelsesopgave2024'
 
 dependencyResolutionManagement {
   versionCatalogs {

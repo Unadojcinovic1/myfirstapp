@@ -1,4 +1,4 @@
-package com.sidstechance
+package com.godkendelsesopgave2024
 
 import android.os.Build
 import android.os.Bundle
