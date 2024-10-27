@@ -4,7 +4,7 @@ import { getAuth, signInWithEmailAndPassword, initializeAuth, getReactNativePers
 import ReactNativeAsyncStorage from '@react-native-async-storage/async-storage';
 import { getApps, initializeApp } from 'firebase/app';
 
-// Firebase configuration
+// Firebase-konfiguration med API-oplysninger
 const firebaseConfig = {
     apiKey: "AIzaSyCQT_g8vsJbeb0zMv3uYZuahtX_x7rreQQ",
     authDomain: "godkendelsesopgave2024-8572c.firebaseapp.com",
@@ -14,12 +14,16 @@ const firebaseConfig = {
     appId: "1:799223231023:web:6910ca9a2aa757f604ccda"
   };
 
-// Initialiser Firebase, hvis der ikke allerede er en app initialiseret
+// Initialiser Firebase, hvis det ikke allerede er gjort
 let app;
 let auth;
 
+// Tjekker, om der allerede findes en Firebase-app-initialisering
+// Initialiserer Firebase-appen med konfigurationen, hvis ingen instanser findes
+// Initialiserer Firebase Authentication med persistence, så brugerens login-status gemmes lokalt
+// Henter eksisterende Firebase-authentication-instans, hvis appen allerede er initialiseret
 if (!getApps().length) {
-  app = initializeApp(firebaseConfig);
+  app = initializeApp(firebaseConfig); 
   auth = initializeAuth(app, {
     persistence: getReactNativePersistence(ReactNativeAsyncStorage),
   });
@@ -27,48 +31,57 @@ if (!getApps().length) {
   auth = getAuth();
 }
 
-export default function LogInForm() { // Ændret navn til LogInForm
+// Ændret navn til LogInForm
+// Definerer state-variabler til email, adgangskode, login-status og fejlmeddelelser
+export default function LogInForm() { 
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isCompleted, setCompleted] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
 
   // LogIn metode til Firebase
+  // Metode til at håndtere login ved at bruge Firebase Authentication
+  // Brug signInWithEmailAndPassword i stedet
+  // Sæt login-processen som fuldført
+  // Sæt fejlbeskeden hvis der opstår en fejl
   const handleSubmit = async () => {
     try {
-      const userCredential = await signInWithEmailAndPassword(auth, email, password); // Brug signInWithEmailAndPassword i stedet
+      const userCredential = await signInWithEmailAndPassword(auth, email, password); 
       const user = userCredential.user;
-      setCompleted(true);  // Sæt login-processen som fuldført
+      setCompleted(true);  
       Alert.alert('Succes', `Du er logget ind som: ${user.email}`);
     } catch (error) {
       const errorMessage = error.message;
-      setErrorMessage(errorMessage);  // Sæt fejlbeskeden hvis der opstår en fejl
+      setErrorMessage(errorMessage);  
     }
   };
 
-  // Funktion til at render knappen
+  // Funktion til at skabe knappen for login med titlen "Log ind"
   const renderButton = () => {
-    return <Button onPress={handleSubmit} title="Login" />; // Ændret til Login
+    return <Button onPress={handleSubmit} title="Log ind" />;
   };
 
   return (
+    // Yderste container for loginskærmen, som anvender stilarterne defineret i styles.container længere nede 
     <View style={styles.container}>
-      <Text style={styles.header}>Log ind</Text> 
+      <Text style={styles.header}>Log ind:</Text> 
 
       <TextInput
         style={styles.input}
-        placeholder="Email"
+        placeholder="E-mail"
         value={email}
-        onChangeText={setEmail}  // Dynamisk opdatering af email
+        // Dynamisk opdatering af email
+        onChangeText={setEmail}  
         keyboardType="email-address"
         autoCapitalize="none"
       />
 
       <TextInput
         style={styles.input}
-        placeholder="Password"
+        placeholder="Adgangskode"
         value={password}
-        onChangeText={setPassword}  // Dynamisk opdatering af password
+        // Dynamisk opdatering af password
+        onChangeText={setPassword}  
         secureTextEntry
       />
 
@@ -85,25 +98,27 @@ export default function LogInForm() { // Ændret navn til LogInForm
   );
 }
 
+// Definerer stilarter til forskellige komponenter i LogInForm
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20,
+    padding: 30,
     justifyContent: 'center',
   },
+
   header: {
-    fontSize: 24,
+    fontSize: 25,
     fontWeight: 'bold',
-    marginBottom: 20,
+    marginBottom: 25,
     textAlign: 'center',
   },
   input: {
-    height: 50,
-    borderColor: '#ccc',
+    height: 40,
+    borderColor: 'black',
     borderWidth: 1,
     borderRadius: 5,
-    marginBottom: 20,
-    paddingHorizontal: 10,
+    marginBottom: 30,
+    paddingHorizontal: 15,
   },
   error: {
     color: 'red',
@@ -112,7 +127,7 @@ const styles = StyleSheet.create({
   },
   success: {
     color: 'green',
-    marginTop: 20,
+    marginTop: 10,
     textAlign: 'center',
   },
 });

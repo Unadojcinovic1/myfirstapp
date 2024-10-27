@@ -4,7 +4,7 @@ import { getAuth, createUserWithEmailAndPassword, initializeAuth, getReactNative
 import ReactNativeAsyncStorage from '@react-native-async-storage/async-storage';
 import { getApps, initializeApp } from 'firebase/app';
 
-// Firebase configuration
+// Firebase-konfiguration med API-nøgler og oplysninger
 const firebaseConfig = {
     apiKey: "AIzaSyCQT_g8vsJbeb0zMv3uYZuahtX_x7rreQQ",
     authDomain: "godkendelsesopgave2024-8572c.firebaseapp.com",
@@ -14,11 +14,12 @@ const firebaseConfig = {
     appId: "1:799223231023:web:6910ca9a2aa757f604ccda"
   };
 
-// Initialiser Firebase, hvis der ikke allerede er en app initialiseret
+// Initialiser Firebase, hvis det ikke allerede er gjort
 let app;
 let auth;
 
 if (!getApps().length) {
+    // Initialiserer en ny Firebase-app
   app = initializeApp(firebaseConfig);
   auth = initializeAuth(app, {
     persistence: getReactNativePersistence(ReactNativeAsyncStorage),
@@ -28,56 +29,60 @@ if (!getApps().length) {
 }
 
 export default function SignUpForm() {
-  // Opret state til email, password, fejlbeskeder og om oprettelsen er fuldført
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [isCompleted, setCompleted] = useState(false);
   const [errorMessage, setErrorMessage] = useState(null);
 
-  // Log værdier for at tjekke om de er korrekte
+  // Logind værdier for at tjekke om de er korrekte
   ("Email: ", email);
   ("Password: ", password);
   ("ErrorMessage: ", errorMessage);
   ("IsCompleted: ", isCompleted);
 
-  // Funktion til at håndtere brugeroprettelsen
+  // Funktion til at håndtere brugeroprettelse via Firebase Authentication (godkendelse)
   const handleSubmit = async () => {
     try {
       const userCredential = await createUserWithEmailAndPassword(auth, email, password);
       const user = userCredential.user;
-      setCompleted(true);  // Sæt oprettelsen som fuldført
+      // Sæt oprettelsen som fuldført
+      setCompleted(true);  
       Alert.alert('Succes', `Bruger oprettet: ${user.email}`);
     } catch (error) {
       const errorMessage = error.message;
-      setErrorMessage(errorMessage);  // Sæt fejlbeskeden hvis der opstår en fejl
+      // Sæt fejlbeskeden hvis der opstår en fejl
+      setErrorMessage(errorMessage);  
     }
   };
 
-  // Funktion til at render knappen
+  // Funktion til at skabe oprettelsesknappen
   const renderButton = () => {
-    return <Button onPress={handleSubmit} title="Create user" />;
+    return <Button onPress={handleSubmit} title="Opret bruger" />;
   };
 
   return (
+    // Yderste container for ssignupkærmen, som anvender stilarterne defineret i styles.container
     <View style={styles.container}>
-      <Text style={styles.header}>Sign up!</Text>
+      <Text style={styles.header}>Opret bruger her:</Text>
 
       {console.log("Rendering TextInput for email and password")}
 
       <TextInput
         style={styles.input}
-        placeholder="Email"
+        placeholder="E-mail"
         value={email}
-        onChangeText={setEmail}  // Dynamisk opdatering af email
+        // Dynamisk opdatering af email
+        onChangeText={setEmail}  
         keyboardType="email-address"
         autoCapitalize="none"
       />
 
       <TextInput
         style={styles.input}
-        placeholder="Password"
+        placeholder="Adgangskode"
         value={password}
-        onChangeText={setPassword}  // Dynamisk opdatering af password
+        // Dynamisk opdatering af password
+        onChangeText={setPassword}  
         secureTextEntry
       />
 
@@ -94,25 +99,26 @@ export default function SignUpForm() {
   );
 }
 
+// Definerer stilarter til komponenter i SignUpForm
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    padding: 20,
+    padding: 30,
     justifyContent: 'center',
   },
   header: {
-    fontSize: 24,
+    fontSize: 25,
     fontWeight: 'bold',
-    marginBottom: 20,
+    marginBottom: 25,
     textAlign: 'center',
   },
   input: {
-    height: 50,
-    borderColor: '#ccc',
+    height: 40,
+    borderColor: 'black',
     borderWidth: 1,
     borderRadius: 5,
-    marginBottom: 20,
-    paddingHorizontal: 10,
+    marginBottom: 30,
+    paddingHorizontal: 15,
   },
   error: {
     color: 'red',
@@ -121,7 +127,7 @@ const styles = StyleSheet.create({
   },
   success: {
     color: 'green',
-    marginTop: 20,
+    marginTop: 10,
     textAlign: 'center',
   },
 });
